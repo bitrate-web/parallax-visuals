@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#09090c">
+<meta name="description" content="Parallax — ресурс-паки Minecraft и визуалы для лаунчера.">
+<title>Parallax — магазин визуалов</title>
+<style>
+:root{
+  --bg:#09090c;--panel:#111116;--panel2:#17171e;--line:#2a2a35;
+  --text:#f4f3f8;--muted:#9a98a8;--purple:#9b5cff;--purple2:#6d35cf;
+  --soft:rgba(155,92,255,.14);--radius:18px;color-scheme:dark
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth;scroll-padding-top:90px}
+body{margin:0;background:var(--bg);color:var(--text);font:16px/1.6 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+background-image:radial-gradient(700px 380px at 12% -10%,rgba(155,92,255,.16),transparent 70%),radial-gradient(600px 350px at 100% 20%,rgba(100,100,125,.09),transparent 70%)}
+a{color:inherit}
+.wrap{width:min(1120px,calc(100% - 40px));margin:auto}
+header{position:sticky;top:0;z-index:10;background:rgba(9,9,12,.82);backdrop-filter:blur(18px);border-bottom:1px solid rgba(255,255,255,.07)}
+nav{min-height:76px;display:flex;align-items:center;justify-content:space-between;gap:24px}
+.logo{font-size:23px;font-weight:900;letter-spacing:3px;text-decoration:none}
+.logo span{color:var(--purple)}
+.navlinks{display:flex;align-items:center;gap:25px}
+.navlinks a{font-size:14px;color:var(--muted);text-decoration:none;transition:.2s}
+.navlinks a:hover{color:#fff}
+.menu-btn{display:none;background:none;border:1px solid var(--line);border-radius:10px;color:white;padding:8px 12px}
+.hero{padding:100px 0 82px;text-align:center;position:relative}
+.eyebrow{display:inline-flex;align-items:center;gap:9px;border:1px solid #393044;background:rgba(155,92,255,.08);padding:7px 13px;border-radius:999px;color:#d7c2ff;font-size:12px;letter-spacing:1.5px;text-transform:uppercase}
+.dot{width:7px;height:7px;border-radius:50%;background:var(--purple);box-shadow:0 0 14px var(--purple)}
+h1{font-size:clamp(42px,7vw,76px);line-height:1.04;letter-spacing:-2.7px;margin:24px 0 20px;font-weight:900}
+.grad{background:linear-gradient(100deg,#fff 5%,#c6a2ff 47%,#8b52ed 90%);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hero p{max-width:610px;margin:0 auto 30px;color:var(--muted);font-size:18px}
+.actions{display:flex;justify-content:center;gap:12px;flex-wrap:wrap}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:9px;text-decoration:none;border:1px solid transparent;border-radius:12px;padding:12px 19px;font-weight:750;font-size:14px;transition:transform .2s,border-color .2s,background .2s;cursor:pointer}
+.btn:hover{transform:translateY(-2px)}
+.btn.primary{background:linear-gradient(120deg,#a66bff,#713bd0);color:#fff;box-shadow:0 8px 28px rgba(125,65,220,.22)}
+.btn.ghost{background:#15151b;border-color:#33333f;color:#e9e7f1}
+.btn.ghost:hover{border-color:var(--purple)}
+.hero-note{font-size:12px;color:#777583;margin-top:18px}
+.section{padding:26px 0 36px}
+.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin:20px 0 22px}
+.kicker{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:var(--purple);font-weight:800}
+h2{font-size:clamp(27px,4vw,36px);line-height:1.15;letter-spacing:-.8px;margin:7px 0 0}
+.section-head p{max-width:420px;margin:0;color:var(--muted);font-size:14px}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.card{position:relative;min-width:0;overflow:hidden;background:linear-gradient(155deg,rgba(25,25,33,.98),rgba(15,15,20,.98));border:1px solid var(--line);border-radius:var(--radius);padding:16px;transition:transform .22s,border-color .22s,box-shadow .22s}
+.card:hover{transform:translateY(-5px);border-color:#7451a7;box-shadow:0 16px 45px rgba(0,0,0,.22)}
+.preview{height:190px;position:relative;overflow:hidden;border-radius:12px;margin-bottom:19px;display:flex;align-items:center;justify-content:center}
+.preview:before,.preview:after{content:"";position:absolute;border:1px solid rgba(255,255,255,.12);transform:rotate(-28deg);border-radius:22px}
+.preview:before{width:210px;height:115px}
+.preview:after{width:145px;height:80px}
+.preview .symbol{font-size:54px;font-weight:950;letter-spacing:-3px;z-index:1;text-shadow:0 8px 30px rgba(0,0,0,.45)}
+.preview.dark{background:radial-gradient(circle at 50% 45%,#44444c 0,#202027 35%,#101014 76%)}
+.preview.dark .symbol{color:#e5e5ec}
+.preview.purple{background:radial-gradient(circle at 50% 45%,#7945b7 0,#38214f 38%,#121018 80%)}
+.preview.purple .symbol{color:#e1c9ff}
+.preview.launcher{background:radial-gradient(circle at 50% 45%,#62517c 0,#292333 40%,#101014 80%)}
+.preview.launcher .symbol{font-size:43px;color:#d8c6f5;letter-spacing:1px}
+.tag{display:inline-flex;border:1px solid #393343;border-radius:7px;background:rgba(155,92,255,.09);padding:4px 8px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:#d3b8ff;font-weight:800}
+.card h3{font-size:20px;letter-spacing:-.3px;margin:11px 0 5px}
+.card p{font-size:13px;line-height:1.65;color:var(--muted);margin:0 0 18px;min-height:44px}
+.features{display:flex;flex-wrap:wrap;gap:7px;margin:0 0 20px}
+.features span{font-size:11px;color:#c1bfcc;background:#202027;border:1px solid #30303a;border-radius:7px;padding:4px 7px}
+.card-bottom{border-top:1px solid #292933;padding-top:15px;display:flex;align-items:center;justify-content:space-between;gap:12px}
+.price{font-size:25px;font-weight:900;letter-spacing:-.8px}
+.price small{font-size:11px;color:var(--muted);font-weight:500;letter-spacing:0}
+.card .btn{padding:10px 13px}
+.info-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:14px}
+.info{padding:20px;border:1px solid var(--line);background:rgba(20,20,27,.7);border-radius:15px}
+.step{font-size:27px;font-weight:900;color:var(--purple)}
+.info h3{font-size:16px;margin:5px 0}
+.info p{font-size:13px;color:var(--muted);margin:0}
+.support{display:flex;align-items:center;justify-content:space-between;gap:25px;padding:26px;border:1px solid #45325e;border-radius:18px;background:linear-gradient(110deg,rgba(155,92,255,.12),rgba(22,22,29,.8) 65%)}
+.support h3{font-size:22px;margin:0 0 5px}
+.support p{color:var(--muted);font-size:14px;margin:0;max-width:620px}
+.socials{display:flex;gap:10px;flex-wrap:wrap}
+footer{border-top:1px solid #25252d;margin-top:70px;padding:25px 0 32px;color:#777583;font-size:12px}
+.footer-inner{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
+footer strong{color:#d9d6e2;letter-spacing:2px}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.grid .card:last-child{grid-column:1/-1}.grid .card:last-child .preview{height:170px}.section-head{align-items:start;flex-direction:column}.navlinks{gap:14px}}
+@media(max-width:580px){.wrap{width:min(100% - 28px,1120px)}nav{min-height:66px}.menu-btn{display:block}.navlinks{display:none;position:absolute;top:65px;left:14px;right:14px;padding:15px;background:#131319;border:1px solid var(--line);border-radius:14px;flex-direction:column;align-items:stretch;gap:0}.navlinks.open{display:flex}.navlinks a{padding:11px 8px}.hero{padding:76px 0 58px}h1{letter-spacing:-1.8px}.hero p{font-size:16px}.grid,.info-grid{grid-template-columns:1fr}.grid .card:last-child{grid-column:auto}.preview{height:175px}.support{align-items:flex-start;flex-direction:column}.section{padding-bottom:25px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap">
+    <nav>
+      <a class="logo" href="#" aria-label="Parallax — главная">P<span>/</span>ARALLAX</a>
+      <button class="menu-btn" id="menuBtn" aria-expanded="false" aria-label="Открыть меню">☰</button>
+      <div class="navlinks" id="navlinks">
+        <a href="#shop">Каталог</a><a href="#buy">Как купить</a><a href="#support">Поддержка</a><a href="#links">Контакты</a>
+      </div>
+    </nav>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="hero">
+    <div class="eyebrow"><span class="dot"></span> Minecraft visuals store</div>
+    <h1>Твой стиль.<br><span class="grad">Твои правила.</span></h1>
+    <p>Ресурс-паки в тёмных оттенках и визуалы для лаунчера — собери собственный стиль Minecraft вместе с Parallax.</p>
+    <div class="actions"><a class="btn primary" href="#shop">Открыть каталог <span aria-hidden="true">↗</span></a><a class="btn ghost" href="#support">Задать вопрос</a></div>
+    <div class="hero-note">Минималистичный дизайн · Тёмная эстетика · Фиолетовые акценты</div>
+  </section>
+
+  <section class="section" id="shop">
+    <div class="section-head"><div><div class="kicker">Каталог</div><h2>Выбери свой визуал</h2></div><p>Подбери оформление под свой стиль игры. Нажми «Купить», чтобы перейти к оплате.</p></div>
+    <div class="grid">
+      <article class="card">
+        <div class="preview dark"><span class="symbol">DARK</span></div>
+        <span class="tag">Resource pack</span>
+        <h3>Parallax Dark</h3>
+        <p>Ресурс-пак в чёрных и графитовых оттенках для строгого, минималистичного образа.</p>
+        <div class="features"><span>Чёрный</span><span>Графит</span><span>Минимализм</span></div>
+        <div class="card-bottom"><div class="price">149 ₽</div><a class="btn primary" href="#" data-pay="ССЫЛКА_НА_ОПЛАТУ_DARK">Купить ↗</a></div>
+      </article>
+      <article class="card">
+        <div class="preview purple"><span class="symbol">PURPLE</span></div>
+        <span class="tag">Resource pack</span>
+        <h3>Parallax Purple</h3>
+        <p>Фиолетовые, сливовые и серые оттенки — выразительный стиль с мягкими акцентами.</p>
+        <div class="features"><span>Фиолетовый</span><span>Серый</span><span>Неоновые акценты</span></div>
+        <div class="card-bottom"><div class="price">149 ₽</div><a class="btn primary" href="#" data-pay="ССЫЛКА_НА_ОПЛАТУ_PURPLE">Купить ↗</a></div>
+      </article>
+      <article class="card">
+        <div class="preview launcher"><span class="symbol">VISUALS</span></div>
+        <span class="tag">Launcher visuals</span>
+        <h3>Launcher Visuals</h3>
+        <p>Визуальное оформление лаунчера в едином стиле: тёмная база и фиолетовые детали.</p>
+        <div class="features"><span>Оформление</span><span>Тёмная тема</span><span>Фиолетовый стиль</span></div>
+        <div class="card-bottom"><div class="price">399 ₽</div><a class="btn primary" href="#" data-pay="ССЫЛКА_НА_ОПЛАТУ_VISUALS">Купить ↗</a></div>
+      </article>
+    </div>
+  </section>
+
+  <section class="section" id="buy">
+    <div class="section-head"><div><div class="kicker">Всего три шага</div><h2>Как купить</h2></div><p>Простой путь от выбора до получения твоего заказа.</p></div>
+    <div class="info-grid">
+      <div class="info"><div class="step">01</div><h3>Выбери товар</h3><p>Открой каталог и выбери ресурс-пак или визуал лаунчера.</p></div>
+      <div class="info"><div class="step">02</div><h3>Оплати заказ</h3><p>Нажми «Купить» — откроется подключённая страница оплаты.</p></div>
+      <div class="info"><div class="step">03</div><h3>Получи покупку</h3><p>Следуй инструкции после оплаты или свяжись с поддержкой.</p></div>
+    </div>
+  </section>
+
+  <section class="section" id="support">
+    <div class="support"><div><div class="kicker">Мы на связи</div><h3>Нужна помощь?</h3><p>Поможем с вопросами по товарам, оплате и установке. Замени ссылку ниже на свой Telegram поддержки.</p></div><a class="btn primary" href="@Parallax7" target="_blank" rel="noopener noreferrer">Написать в Telegram ↗</a></div>
+  </section>
+
+  <section class="section" id="links">
+    <div class="section-head"><div><div class="kicker">Сообщество</div><h2>Оставайся на связи</h2></div></div>
+    <div class="socials">
+      <a class="btn ghost" href="t.me/parallax_com" target="_blank" rel="noopener noreferrer">Telegram ↗</a>
+      <a class="btn ghost" href="https://discord.gg/2K8BQPBbXF" target="_blank" rel="noopener noreferrer">Discord ↗</a>
+      <a class="btn ghost" href="https://www.tiktok.com/@parallax_com" target="_blank" rel="noopener noreferrer">TikTok ↗</a>
+    </div>
+  </section>
+</main>
+<footer><div class="wrap footer-inner"><div><strong>PARALLAX</strong> <span>· Магазин визуалов</span></div><div>© 2026 Parallax. Все права защищены.</div></div></footer>
+<script>
+const menuBtn=document.getElementById('menuBtn');
+const navlinks=document.getElementById('navlinks');
+menuBtn.addEventListener('click',()=>{const open=navlinks.classList.toggle('open');menuBtn.setAttribute('aria-expanded',String(open));});
+navlinks.querySelectorAll('a').forEach(a=>a.addEventListener('click',()=>{navlinks.classList.remove('open');menuBtn.setAttribute('aria-expanded','false');}));
+document.querySelectorAll('[data-pay]').forEach(link=>link.addEventListener('click',event=>{
+  const url=link.dataset.pay;
+  if(!url||url.startsWith('ССЫЛКА_НА_ОПЛАТУ_')){
+    event.preventDefault();
+    alert('Ссылка оплаты ещё не настроена. Замени значение data-pay у этой карточки на ссылку своего платёжного сервиса.');
+  }else{
+    event.preventDefault();
+    window.open(url,'_blank','noopener,noreferrer');
+  }
+}));
+</script>
+</body>
+</html>
